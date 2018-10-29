@@ -1,0 +1,103 @@
+<%include ./header.ejs %>
+<br><br>
+<%include ./sidebar.ejs %>
+
+    <br>
+
+    <script>
+      function onWriteSubmit() {
+        
+        
+        $("#updateForm").submit();
+
+      }
+      
+    </script>
+
+    <form id="updateForm" name="updateForm" action="/seller/product_update" method="post" onsubmit="return onWriteSubmit()">
+    
+    <h2 class="sub-header">제품 수정</h2>
+
+
+	<br>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+
+      <input type="hidden" name="productnum" id="productnum" value="<%=row.productnum%>"/>
+
+      <input type="hidden" name="sellerid" id="sellerid" value="<%=row.sellerid%>"/>
+
+      <tr>
+        <td>제품 ID</td>
+        <td><%=row.productnum%></td>
+      </tr>
+
+      <tr>
+        <td>판매자 ID</td>
+        <td><%=row.sellerid%></td>
+      </tr>
+
+      <tr>
+        <td>제품 이름</td>
+        <td><input type="text" name="productname" id="productname" value="<%=row.productname%>" required/></td>
+      </tr>
+
+      <tr>
+        <td>제품 회사</td>
+        <td><input type="text" name="company" id="company" value="<%=row.company%>" required/></td>
+      </tr>
+
+      
+
+      <tr>
+        <td>제품 타입</td>
+        <td>
+        <select name="producttype" id="producttype">
+            <option value="top">Top</option>
+            <option value="outer">Outer</option>
+            <option value="pants">Pants</option>
+        </select>
+        <td>
+      </tr>
+
+      <tr>
+        <td>사이즈 S</td>
+        <td><input type="text" name="s" id="s" value="<%=row.s%>" required/></td>
+      </tr>
+
+      <tr>
+        <td>사이즈 M</td>
+        <td><input type="text" name="m" id="m" value="<%=row.m%>" required/></td>
+      </tr>
+
+      <tr>
+        <td>사이즈 L</td>
+        <td><input type="text" name="l" id="l" value="<%=row.l%>" required/></td>
+      </tr>
+
+      <tr>
+        <td>가격</td>
+        <td><input type="text" name="price" id="price" value="<%=row.price%>" required/></td>
+      </tr>
+
+      <tr>
+        <td>판매량</td>
+        <td><%=row.sale%></td>
+      </tr>
+
+      </table>
+    </div>
+    <br>
+    <div class="margin-bottom" style="text-align:center">
+
+      <button type="submit" class="btn btn-success">수정</button>
+
+      &nbsp;
+
+      <input type="button" value="취소" class="btn btn-danger" onClick="self.location='/seller/product';">
+     
+    </div>
+    </form>
+  </body>
+</html>

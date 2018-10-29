@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <title>modify</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+<div class="container">
+  <table class="table table-hover">
+
+
+<h1><%= title %></h1>
+
+<form action="/mypage/modify" method="post"  onsubmit ="return onWriteSubmit()">
+	
+		<tr>
+			<td>아이디 </td>	
+			<td><%=row.memberid%></td>
+			<input type="hidden" name="memberid" value="<%=row.memberid%>"/>
+			</tr>
+
+			<tr>
+			<td>닉네임</td>
+			<td><input type = "text" name = "nickname" id="nickname" value="<%=row.nickname%>" required/></td>
+			</tr>
+
+			<tr>
+			<td>비밀번호</td>
+			<td><input type= "password" name="pw" id= "pw" required/></td>
+			</tr>
+			<tr>
+			<th>주소</th>
+			<td><input type="text" name="address" id = "address" value="<%=row.address%>" required/></td>
+			</tr>
+					
+				<tr>
+			<td>전화번호 </td>
+			<td><input type = "text" name = "phone" id="phone" value="<%=row.phone%>" required/></td>
+			</tr>
+
+			<tr>
+
+
+			<th>이메일</th>
+				<td><input type="email" name="email" id = "email" value="<%=row.email%>" required/></td>
+			</tr>
+
+			<tr>
+			<td colspan="2"><button class="btn btn-default" type="submit">글쓰기</button>
+			</td>
+			</tr>
+				
+
+  </table>
+  </div>
+				</form>
+
+
+
+
+<script> 
+function onWriteSubmit()
+{
+		if( $("#memberid").val().trim() =="")
+		{
+			var message ="아이디를 입력해 주세요 ";
+			$("#memberid").val("");
+			$("#memberid").focus();
+			alert(message);
+			return false;
+		}
+		if($("#nickname").val().trim()=="")
+		{
+			var message ="nickname을 입력해 주세요 ";
+			$("#nickname").val("");
+			$("#nickname").focus();
+			alert(message);
+			return false;
+		}
+		if($("#pw").val().trim()=="")
+		{
+			var message ="pw를 입력해 주세요 ";
+			$("#pw").val("");
+			$("#pw").focus();
+			alert(message);
+			return false;
+		}
+		if($("#address").val().trim()=="")
+		{
+			var message ="address를 입력해 주세요 ";
+			$("#address").val("");
+			$("#address").focus();
+			alert(message);
+			return false;
+		}
+		if($("#phone").val().trim()=="")
+		{
+			var message ="phone를 입력해 주세요 ";
+			$("#phone").val("");
+			$("#phone").focus();
+			alert(message);
+			return false;
+		}
+		if($("#email").val().trim()=="")
+		{
+			var message ="email를 입력해 주세요 ";
+			$("#email").val("");
+			$("#email").focus();
+			alert(message);
+			return false;
+		}
+	}
+</script>
+</body>
+</html>
+

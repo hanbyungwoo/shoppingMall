@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<%include ./1.ejs %>
+
+  
+    <script type="text/javascript">
+        function btnSearchID() {
+            if( $("#name").val().trim() == "" ) {
+                var message = "이름을 입력해 주세요";
+                $("#name").val("");
+                $("#name").focus();
+                alert(message);
+                return false;
+            }
+
+            if( $("#email").val().trim() == "" ) {
+                var message = "이메일을 입력해 주세요";
+                $("#email").val("");
+                $("#email").focus();
+                alert(message);
+                return false;
+            } 
+            // var form = document.forms['test_form'];
+            // form.action = '/login'
+            // form.submit();
+        }
+        // function btnBack() {
+        //     var form = document.forms['test_form'];
+        //     form.action = '/login'
+        //     form.submit();
+        // }
+
+    </script>
+  
+<head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <table class="table table-hover">
+    <h1>아이디 찾기</h1>
+    <form id="join" action="/login/result_id" onsubmit="return btnSearchID()">
+        	<tr>
+    		<th>이름</th>
+    		<td><input type="text" name="name" id="name" size="12" maxlength="12"></td>
+    	</tr>
+        <tr>
+        <tr>
+            <th>이메일</th>
+            <td><input type="text" name="email" id="email" size="20"></td>
+        </tr>
+    	
+		<tr>
+			<td colspan="2">
+                <button type="submit"  class="btn btn-default" onclick=btnSearchID();>찾기</button>
+                <!-- <button type="submit" onclick=btnBack();>뒤로가기</button> -->
+				<input type="reset" class="btn btn-default"  name="cancel" value="취소">
+                <a href="/login">뒤로가기</a>
+			</td>
+		</tr>
+	</table>
+    </div>	</form>
+  </body>
+</html>

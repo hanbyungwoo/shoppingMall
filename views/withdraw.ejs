@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html><%include ./1.ejs %>
+<head>
+ <title>withdraw</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+    
+	
+
+		<h1>회원탈퇴</h1>
+		<form action="withdraw" method="post">
+			<h3>비밀번호를 확인해주세요.</h3>
+				<tr>
+					<td>아이디</td>
+					<td><%=user_id%></td>
+				</tr>
+				<tr>
+					<td>비밀번호 확인</td>
+					<td><input type="password" name="passwd"/></td>
+				</tr>
+			</tbody>
+
+  </table>
+			<button class="btn btn-default" type="submit">탈퇴하기</button>
+		</form>
+</div>
+	</body>
+</html>

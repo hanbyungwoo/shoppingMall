@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html><%include ./1.ejs %>
+    
+<head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <table class="table table-hover">
+
+<h1><%= title %></h1>
+
+<form id="updateForm" name="updateForm" action="/product/review_update" method="post" onsubmit="return onWriteSubmit()">
+
+	
+		<input type="hidden" name="purchasenum" value="<%=row.purchasenum%>"/>
+		<input type="hidden" name="productnum" value="<%=row.productnum%>"/>
+		<tr>
+			<td>작성자</td>
+			<td><%=member_id%></td>
+		</tr>
+
+		<tr>
+			<td>제목</td>
+			<td><input type="text" name="title" id="title" value="<%=row.title%>" required/></td>
+		</tr>
+
+		<tr>
+			<td>내용</td>
+			<td><textarea name="context" id="content" cols="30" rows="10" required><%=row.context%></textarea></td>
+		</tr>
+
+		<tr><input type="hidden" name="today" id="today"></tr>
+
+		<tr>
+			<td colspan="2">
+				<button type="submit" class="btn btn-default">글수정</button>
+			</td>
+		</tr>
+	</table>
+	</div>
+</form>
+
+<script>
+	function onWriteSubmit() {
+		var d=new Date();
+		var today =
+		    leadingZeros(d.getFullYear(), 4) + '-' +
+		    leadingZeros(d.getMonth() + 1, 2) + '-' +
+		    leadingZeros(d.getDate(), 2);
+
+		$("#today").val(today);
+		
+		if( $("#title").val().trim() == "") {
+			var message = "제목을 입력해 주세요";
+			$("#title").val("");
+			$("#title").focus();
+			alert(message);
+			return false;
+		}
+
+		if( $("#context").val().trim() == "") {
+			var message = "본문 내용을 입력해 주세요";
+			$("#context").val("");
+			$("#context").focus();
+			alert(message);
+			return false;
+		}
+
+		$("#updateForm").submit();
+
+	}
+	function leadingZeros(n, digits) {
+		var zero = '';
+		n = n.toString();
+
+		if (n.length < digits) {
+	    for (i = 0; i < digits - n.length; i++)
+	    	zero += '0';
+		}
+	 	return zero + n;
+	}
+</script>
+</body>
+</html>

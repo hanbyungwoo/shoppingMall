@@ -1,0 +1,40 @@
+<script>
+$(document).ready( function () {
+	var selected = "<?php echo $method ?>";
+
+	switch(selected) {
+		case "index" :
+			$("li[name='sideBar'][value='0']").addClass('active');
+			break;
+		case "store" :
+			$("li[name='sideBar'][value='0']").addClass('active');
+			break;
+		case "store_review" :
+			$("li[name='sideBar'][value='1']").addClass('active');
+			break;
+		case "recommend" :
+			$("li[name='sideBar'][value='2']").addClass('active');
+			break;
+		case "event" :
+			$("li[name='sideBar'][value='3']").addClass('active');
+			break;
+		case "event_review" :
+			$("li[name='sideBar'][value='4']").addClass('active');
+			break;
+		case "user" :
+			$("li[name='sideBar'][value='5']").addClass('active');
+			break;
+		case "crawling" :
+			$("li[name='sideBar'][value='6']").addClass('active');
+			break;
+	}
+});
+</script>
+
+<div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li name="sideBar" value="0"><a href="/seller">물품 관리</a></li>
+    <li name="sideBar" value="1"><a href="/seller/product_review">리뷰 보기</a></li>
+    <br><br><br><br><br><br><br>
+  </ul>
+</div>

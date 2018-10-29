@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+<%include ./1.ejs %>
+    <title><%= title %></title>
+
+<!-- 여기 버튼 함수 추가해야함. -->
+	<script type="text/javascript">
+		function btnLogin() {
+			if( $("#id").val().trim() == "") {
+        var message = "아이디를 입력해 주세요";
+        $("#id").val("");
+        $("#id").focus();
+        alert(message);
+        return false;
+      }
+
+      if( $("#passwd").val().trim() == "") {
+        var message = "비밀번호를 입력해 주세요";
+        $("#passwd").val("");
+        $("#passwd").focus();
+        alert(message);
+        return false;
+      }
+
+		}
+
+    function btnSearchID() {
+      var form = document.forms['test_form'];
+      form.action = '/login/find_id'
+      form.submit();
+    }
+
+    function btnSearchPW() {
+      var form = document.forms['test_form'];
+      form.action = '/login/find_pw'
+      form.submit(); 
+    }
+	</script>
+
+  </head>
+
+  <body>
+    
+    <form name="test_form" method="post">
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+<table class="table table-hover">
+    <thead>
+
+    <h1><%= title %></h1>
+
+    <tr>
+      <td>아이디</td>
+        <td><input type="text" name="id" id="id" required/></td>
+    </tr>
+    
+    <tr>
+      <td>비밀번호</td>
+        <td><input type="password" name="passwd" id="passwd" required/></td>
+    </tr>
+    
+    
+    </tr>
+
+    </table>
+    <br>
+    <button type="submit" onclick=btnLogin(); class="btn btn-default">로그인</button>
+    <button type="submit" onclick=btnSearchID(); class="btn btn-default">아이디찾기</button>
+    <button type="submit" onclick=btnSearchPW(); class="btn btn-default">비밀번호찾기</button>
+    </form>
+
+    </tbody>
+  </table>
+</div>
+
+
+  </body>
+</html>

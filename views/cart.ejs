@@ -1,0 +1,82 @@
+<!--
+   2016/05/17
+   박래현 - form 이름을 "delete<%=i%>"에서 "delete"로 변경
+            form 삭제하기 버튼 -> onDelete
+            form 구매하기 버튼 -> onPurchase
+ -->
+
+<!DOCTYPE html>
+<html>
+
+<%include ./1.ejs %>
+    
+  <head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
+
+
+       <script>
+         function onPurchase(){
+            alert("구매가 완료되었습니다");
+            $(":checkbox[name='checked']:checked").each(function(){
+               var index = $(":checkbox[name='checked']").index(this);
+               $("input[name='selected']:eq("+ index +")").val("true");
+            });
+            $("#cartForm").attr("action", "/mypage/purchase_completion");
+            $("#cartForm").submit();
+         }
+       </script>
+   </head>
+<body>
+   
+  <div class="container">
+  <table class="table table-hover">
+    <h1><%= title %></h1>'<a href = "/mypage"> Mypage </a>
+    <thead>
+
+      <h1>장바구니</h1>
+      <form id="cartForm" action="cart/delete" method="post">
+            <tr>
+               <td>번호</td>
+               <td>체크</td>
+               <td>상품명(옵션)</td>
+               <td>판매가</td>
+               <td>할인</td>
+               <td>주문금액</td>
+               <td>주문관리</td>
+            </tr>
+<%
+            for(var i = 0; i < rows.length; i++){
+               var item = rows[i];
+%>
+               <tr>
+               	  <input type="hidden" name="from" id="from" value="cart" />
+                  <input type="hidden" name="productnum" value="<%=item.productnum%>"/>
+                  <td><%=i+1%></td>
+                  <td><input type="checkbox" name="checked"></checkbox></td>
+                  <td><%=item.productname%><br>사이즈 : <input type="hidden" name="size" value="<%=item.size%>"/><%=item.size%></td>
+                  <td><%=item.price%></td>
+                  <td><%=item.sale%></td>
+                  <td><input type="hidden" name="price" value="<%=item.price-item.sale%>"/><%=item.price-item.sale%></td>
+                  <td><button type="submit" name="deleteBtn" value="<%=i%>">삭제하기</button></td>
+                   <input type="hidden" name="selected" value="false" />
+               </tr>
+<%
+            }
+%>
+          <input type="hidden" name="num_of_products" value="<%=rows.length%>" />
+         </tbody>
+
+      </table>
+         <button type="button"  class="btn btn-default" onclick="onPurchase()">구매하기</button>
+      </div>
+      </form>
+   </body>
+</html>

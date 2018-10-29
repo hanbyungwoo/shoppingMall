@@ -1,0 +1,119 @@
+  <!DOCTYPE html>
+<html>
+<%include ./1.ejs %>
+    
+<head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+
+   <script type="text/javascript">
+    function btnPurchase() {
+      var form = document.forms['test_form'];
+      form.action = '/mypage/purchase_completion'
+      form.method = 'post'
+      form.submit();
+    }
+   
+    function btnGoCart() {
+      var form = document.forms['test_form'];
+      form.action = '/product/go_cart'
+      form.submit();
+    }
+
+    function btnWishlist() {
+      var form = document.forms['test_form'];
+      form.action = '/product/go_wishlist'
+      form.submit(); 
+    }
+    </script>
+   
+<body>
+<div class="container">
+  <table class="table table-hover">
+
+<h1 align="center"><%= title %></h1>
+   <form name="test_form" method="get">
+   <input type="hidden" name="from" id="from" value="product_detail" />
+   <input type="hidden" name="productnum" id="productnum" value="<%=rows[0].productnum%>" />
+   <input type="hidden" name="num_of_products" id="num_of_products" value=1 />
+   <input type="hidden" name="selected" id="selected" value="true" />
+      <tr>
+         <td>상품명</td>
+         <td><%=rows[0].productname%></td>
+         </tr>
+         <tr> 
+         <td> 가격 </td>
+         <td><%=rows[0].price%></td>
+         </tr>
+
+         <tr>
+            <td> 세일 </td>
+            <td> <%=rows[0].sale%></td>
+            </tr>
+
+            <tr>
+            <td >제조년월</td>
+            <td><%=rows[0].productdate%></td>
+            </tr>
+
+   
+
+            <tr>
+                <td >이미지</td>
+                <td><img src='../../../images/<%=rows[0].producttype%>/<%=rows[0].image1%>' width=150></td>
+            </tr>
+
+            <tr>
+            <th>사이즈</th>
+            <td>
+                <select name="size" id="size">
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                </select>
+            </td>
+        </tr>
+
+</table>
+</div>    
+
+<div align="center">
+    <button type ="submit" onclick=btnPurchase(); class="btn btn-default">Buy Now!</button>
+    <button type ="submit" onclick=btnGoCart(); class="btn btn-default">장바구니 담기</button>
+    <button type ="submit" onclick=btnWishlist(); class="btn btn-default">찜하기</button>
+</div>
+    </br>
+    
+</br>
+</br>
+    <table class="table table-hover">
+	 <tr>
+        <% if(user_id == rows[0].sellerid || department == "manager") { %>
+            <td align="center"><a href="/product/product_delete/<%=rows[0].productnum%>">물품삭제</a></td>
+        <% } %>
+     </tr>
+      <tr>
+      	<td align="center"><img src="../../../images/<%=rows[0].producttype%>/<%=rows[0].image2%>"></td>
+        
+         </tr>
+
+         <tr> 
+            <td align="center"><a href="/product/product_review/<%=rows[0].productnum%>">Review</a></td>
+         </tr>
+
+         <tr>
+            <td align="center">Q&A</td>
+         </tr>
+
+
+</table>
+</form>
+</body>
+</html>
+            

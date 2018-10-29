@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+
+<%include ./1.ejs %>
+  
+<head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+<div class="container">
+  <table class="table table-hover">
+    <h1><%= title %></h1>
+    
+    <br>
+    <br>
+
+
+	<tr>
+		<td>물품type</td>
+		<td>물품명</td>
+	</tr>
+	<%
+		for(var i=0; i<rows.length; i++)
+		{
+			var oneItem=rows[i];
+	%>
+		<tr>
+			<td><%=oneItem.producttype%></td>
+			<td><a href="/product/product_detail/<%=oneItem.productname%>"><%=oneItem.productname%></a></td>
+		</tr>
+		<%
+		}
+		%>
+</table>
+</div>
+  </body>
+</html>

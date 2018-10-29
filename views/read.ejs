@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<%include ./1.ejs %>
+<head>
+ <title>read</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+<h1><%=title%></h1>
+
+<form action="/Q&A/update" method="get">
+        <input type="hidden" name="contentnum" value="<%=row.contentnum%>"/>
+        <tr>
+            <td>작성자</td>
+            <td><%=row.memberid%></td>
+        </tr>
+        <tr>
+            <td>제목</td>
+            <td><%=row.title%></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td><%=row.context%></td>
+        </tr>
+        <tr>
+            <td>등록날짜</td>
+            <td><%=row.q_adate%></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <% if(department == "manager") {%>
+                    <button type="submit" class="btn btn-default">글 수정</button>
+                <% } else if(row.memberid != user_id) { %>
+                <% } else { %>
+                    <button type="submit" class="btn btn-default">글 수정</button>
+                <% } %>
+                <a href="/Q&A">리스트로 돌아가기</a>
+            </td>
+        </tr>
+    </table>
+    </form>
+    <br>
+    <form action="/Q&A/delete" method="get">
+        <input type="hidden" name="contentnum" value="<%=row.contentnum%>"/>
+        <% if(department == "manager") {%>
+            <button type="submit" class="btn btn-default" >삭제</button>
+        <% } else if(row.memberid != user_id) { %>
+        <% } else { %>
+            <button type="submit" class="btn btn-default" >삭제</button>
+        <% } %>
+        
+    </form>
+    <br>
+    <form name="replyFrom" action="/Q&A/reply" id="readreplyForm" name="readreplyForm" method="get" onsubmit="return onReadReply()">
+        <% if(rows === undefined) { %>
+            <input type="hidden" name="contentnum" value="<%=row.contentnum%>"/>
+            <input type="hidden" name="title" value="<%=row.title%>"/>
+            <tr><input type="hidden" name="today" id="today"></tr>
+            <% if(department == "manager") {%>
+                <textarea id="reply" name="reply" cols="30" rows="10"></textarea>
+                <button type="submit">답변달기</button>
+            <% } %>
+        <% } else { %>
+            <table class="table table-hover">
+                <input type="hidden" name="contentnum" value="<%=rows.contentnum%>"/>
+                <tr>
+                    <td colspan="2">RE : <%=row.title%></td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td><%=rows.context%></td>
+                </tr>
+                <tr>
+                    <td>등록날짜</td>
+                    <td><%=rows.q_adate%></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <% if(department == "manager") { %>
+                            <button type="submit" class="btn btn-default" onclick=btnReplyUpdate();>글 수정</button>
+                        <% } %>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        <% } %>
+    </form>
+    
+    <br>
+
+    <form action="/Q&A/reply_delete" method="post">
+        <input type="hidden" name="contentnum" value="<%=row.contentnum%>"/>
+        <% if(rows === undefined) { %>
+        <% } else if(department == "manager") {%>
+            <button type="submit" class="btn btn-default" >삭제</button>
+        <% } %>
+        </div>
+    </form>
+
+
+
+
+
+
+
+    <script>
+    function btnReplyUpdate() {
+      var form = document.forms['replyFrom'];
+      form.action = '/Q&A/reply_update'
+      form.submit();
+    }
+
+    function onReadReply() {
+        var d=new Date();
+        var today =
+            leadingZeros(d.getFullYear(), 4) + '-' +
+            leadingZeros(d.getMonth() + 1, 2) + '-' +
+            leadingZeros(d.getDate(), 2);
+
+        $("#today").val(today);
+        
+        if( $("#reply").val().trim() == "") {
+            var message = "답변을 입력해주세요";
+            $("#reply").val("");
+            $("#reply").focus();
+            alert(message);
+            return false;
+        }
+
+        $("#readreplyForm").submit();
+
+    }
+    function leadingZeros(n, digits) {
+        var zero = '';
+        n = n.toString();
+
+        if (n.length < digits) {
+        for (i = 0; i < digits - n.length; i++)
+            zero += '0';
+        }
+        return zero + n;
+    }
+</script>
+
+</body>
+</html>

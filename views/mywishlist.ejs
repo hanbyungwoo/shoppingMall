@@ -1,0 +1,86 @@
+<!--
+	2016/05/17
+	박래현 - 위시리스트에 장바구니 담기 버튼, 기능 추가
+				한개의 폼에 장바구니 담기와 삭제기능 분리
+-->
+
+<!DOCTYPE html>
+<html>
+<%include ./1.ejs %>
+    
+
+        <script>
+		function onAddtocart(){
+			$(":checkbox[name='checked']:checked").each(function(){
+				var index = $(":checkbox[name='checked']").index(this);
+				$("input[name='selected']:eq("+ index +")").val("true");
+			});
+			$("#wishlistt").attr("action", "/mypage/wishlist/toCart");
+			$("#wishlistt").submit();
+		}
+		
+		function onDelete(){
+			$(":checkbox[name='checked']:checked").each(function(){
+				var index = $(":checkbox[name='checked']").index(this);
+				$("input[name='selected']:eq("+ index +")").val("true");
+			});
+			$("#wishlistt").attr("action", "/mypage/wishlist/delete");
+			$("#wishlistt").submit();
+		}
+    </script>
+  
+
+
+  <head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+<div class="container">
+  <table class="table table-hover">
+
+  <h1><%= title %></h1>'<a href = "/mypage"> Mypage </a>
+    <br>
+    <br>
+    <tr>
+    <td>id</td>
+    <td>상품명</td>
+    <td>사이즈</td>
+     <td>선택</td>
+    </tr>
+    
+    <form id="wishlistt" action = "/mypage/wishlist " method = "post">
+<%
+    	for (var i=0;i<rows.length;i++)
+    	{
+    		var oneItem = rows[i];
+   %>
+    	<tr>
+    		<td><input type="hidden" name="memberid" value="<%=oneItem.memberid%>" /><%=oneItem.memberid%></td>
+    	    <td><input type="hidden" name="productnum" value="<%=oneItem.productnum%>" />
+    	    		<a href ="/mypage/q_acontent/<%=oneItem.contentnum%>"><%=oneItem.productname%></a></td>
+    		<td><input type="hidden" name="size" value="<%=oneItem.size%>" /><%=oneItem.size%></td>
+    		<td><input type ="checkbox" name="checked" value= "<%oneItem.productnum%>" /></td>
+    		<input type="hidden" name="selected" value="false" />
+        </tr>
+    		
+            <%
+    		}
+    		%>
+            <input type="hidden" name="num_of_products" value="<%=rows.length%>" />
+    		 <td colspan="4">
+                <button type="button" class="btn btn-default" onclick="onAddtocart()">  장바구니 담기 </button>
+                <button type="button" class="btn btn-default" onclick="onDelete()">선택 삭제 </button>
+                </td>
+            </form>
+            </table>
+            </div>
+      </body>
+</html>

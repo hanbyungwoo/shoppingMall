@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<%include ./1.ejs %>
+
+
+
+	<head>
+		<title><%= title %></title>
+	    
+	</head>
+<head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<form name="context" id="context" action="/Q&A/write" method="post" onsubmit="return onWriteSubmit()">
+	<div class="container">
+  <table class="table table-hover">
+    <thead>
+<h1><%= title %></h1>
+
+		
+		<tr>
+			<td>제목</td>
+				<td><input type="text" name="title" id="title" required/></td>
+		</tr>
+
+		<tr>
+			<td>내용</td>
+				<td><textarea name="content" id="content" cols="30" rows="10" required></textarea></td>
+		</tr>
+<!-- 
+		<tr>
+			<td>이미지</td>
+				<td><input type="file" name="image" accept="image/*" required/></td>
+		</tr> -->
+
+		<tr>
+			<td>패스워드</td>
+			<td><input type="password" name="passwd" id="passwd" required/></td>
+		</tr>
+
+		<tr><input type="hidden" name="today" id="today"></tr>
+
+		<tr>
+			<td colspan="2">
+				<button class="btn btn-default" type="submit">글쓰기</button>
+			</td>
+		</tr>
+	
+ </tbody>
+
+  </table>
+</form>
+
+	<script>
+		function onWriteSubmit() {
+			if( $("#title").val().trim() == "" ) {
+				var message = "제목을 입력해 주세요";
+				$("#title").val("");
+				$("#title").focus();
+				alert(message);
+				return false;
+			}
+
+			if( $("#content").val().trim() == "" ) {
+				var message = "본문 내용을 입력해 주세요";
+				$("#content").val("");
+				$("#content").focus();
+				alert(message);
+				return false;
+			}
+			if( $("#passwd").val().trim() == "") {
+				var message = "패스워드를 입력해 주세요";
+				$("#passwd").val("");
+				$("#passwd").focus();
+				alert(message);
+				return false;
+			}
+			var d=new Date();
+			var today =
+			    leadingZeros(d.getFullYear(), 4) + '-' +
+			    leadingZeros(d.getMonth() + 1, 2) + '-' +
+			    leadingZeros(d.getDate(), 2);
+
+			$("#today").val(today);
+			$("#context").submit();
+
+		}
+
+		function leadingZeros(n, digits) {
+			var zero = '';
+			n = n.toString();
+
+			if (n.length < digits) {
+		    for (i = 0; i < digits - n.length; i++)
+		    	zero += '0';
+			}
+		 	return zero + n;
+		}
+
+	</script>
+
+</body>
+</html>

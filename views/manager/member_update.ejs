@@ -1,0 +1,142 @@
+<%include ./header.ejs %>
+<br><br>
+<%include ./sidebar.ejs %>
+
+    <br>
+
+    <script>
+      function onWriteSubmit() {
+
+        var department =$(":input:radio[name=sellerorbuyer]:checked").val();     
+        if(department == "")
+        {
+            alert("seller or buyer 를 선택하세요 ");
+            $("#sellerorbuyer").focus();
+            return ;
+        }
+
+        if($("#passwd").val() == "" )
+        {
+            alert("비밀번호를 꼭 입력 하세요");
+            $("#passwd").focus();
+            return ;
+        }
+        if($("#passwd2").val() == "" )
+        {
+            alert("비밀번호확인을 꼭 입력 하세요");
+            $("#passwd2").focus();
+            return ;
+        }
+        if($("#nickname").val == "" )
+        {
+            alert("이름을 꼭 입력 하세요");
+            $("#nickname").focus();
+            return ;
+        }
+         if($("#email").val() == "")
+        {
+            alert("이메일을 꼭 입력 하세요");
+            $("#email").focus();
+            return ;
+        }
+        if($("#tel").val() == "")
+        {
+            alert("전화번호 두번째 자리를 확인해 주세요");
+            $("#tel").focus();
+            return ;
+        }
+        if($("#address").val() == "")
+        {
+            alert("주소를 꼭 입력해 주세요");
+            $("#address").focus();
+            return ;
+        }
+        if($("#passwd").val() != $("#passwd2").val()) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return ;
+        }
+        
+        
+        $("#updateForm").submit();
+
+      }
+      
+    </script>
+
+    <form id="updateForm" name="updateForm" action="/manager/member_update" method="post" onsubmit="return onWriteSubmit()">
+    
+    <h2 class="sub-header">사용자 수정</h2>
+
+
+    <br>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+
+      <input type="hidden" name="memberid" id="memberid" value="<%=row.memberid%>"/>
+
+        
+
+      <tr>
+        <td>ID</td>
+        <td><%=row.memberid%></td>
+      </tr>
+
+      <tr>      
+        <td>사용자 구분</td>
+        <td>
+            <input type="radio" id="sellerorbuyer" name="sellerorbuyer" value="member"> member
+            <input type="radio" id="sellerorbuyer" name="sellerorbuyer" value="seller">seller
+            <input type="radio" id="sellerorbuyer" name="sellerorbuyer" value="manager">manager
+        </td>
+      </tr>
+
+      <tr>
+        <td>이름</td>
+        <td><input type="text" name="nickname" id="nickname" value="<%=row.nickname%>" required/></td>
+      </tr>
+
+      <tr>
+        <td>비밀 번호</td>
+        <td><input type="password" name="passwd" id="passwd" size="12" maxlength="12"></td>
+      </tr>
+
+      <tr>
+        <td>비밀 번호 확인</td>
+        <td><input type="password" name="passwd2" id="passwd2" size="12" maxlength="12"></td>
+      </tr>
+
+      <tr>
+        <td>주소</td>
+        <td><input type="text" name="address" id="address" value="<%=row.address%>" required/></td>
+      </tr>
+
+      <tr>
+        <td>핸드폰 번호</td>
+        <td><input type="text" name="phone" id="phone" value="<%=row.phone%>" required/></td>
+      </tr>
+
+
+
+      <tr>
+        <td>이메일</td>
+        <td><input type="text" name="email" id="email" value="<%=row.email%>" required/></td>
+      </tr>
+
+     
+
+      </table>
+    </div>
+    <br>
+    <div class="margin-bottom" style="text-align:center">
+
+      <button type="submit" class="btn btn-success">수정</button>
+
+      &nbsp;
+
+      <input type="button" value="취소" class="btn btn-danger" onClick="self.location='/manager/main';">
+     
+    </div>
+    </form>
+  </body>
+</html>

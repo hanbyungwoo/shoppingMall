@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <%include ./1.ejs %>
+    
+  
+<head>
+ <title>df</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+
+   <form action="/product_register" method="post" enctype="multipart/form-data" onsubmit="return onWriteSubmit()">
+   <tr>
+	 <tr>
+	<td>제품명</td>
+	<td><input type="text" name="productname" id="productname" required/></td>
+   </tr>
+   <tr>
+	<td>company</td>
+	<td><input type="text" name="company" id="company" required/></td>
+   </tr>
+   <tr>
+	<td>제조년월</td>
+	<td><input type="text" name="productdate" id="productdate" required/></td>
+   </tr>
+   <tr>
+	<td>제품type</td>
+  <td>
+  <select name = "producttype" >
+  <option value = "top">top</option>
+  <option value = "pants">pants</option>
+  <option value = "outer">outer</option>
+  </select>
+	</td>
+
+   </tr>
+   <tr>
+	<td>s 갯수</td>
+	<td><input type="text" name="s" id="s" required/></td>
+   </tr>
+   <tr>
+	<td>m 갯수</td>
+	<td><input type="text" name="m" id="m" required/></td>
+   </tr>
+   <tr>
+	<td>l 갯수</td>
+	<td><input type="text" name="l" id="l" required/></td>
+   </tr>
+   <tr>
+	<td>가격</td>
+	<td><input type="text" name="price" id="price" required/></td>
+   </tr>
+   <tr>
+	<td>할인</td>
+	<td><input type="text" name="sale" id="sale" required/></td>
+   </tr>
+   <tr>
+         <td>이미지1</td>
+         <td><input type="file" name="image1" accept="image/*" required/></td>
+   </tr>
+         <td>이미지2</td>
+         <td><input type="file" name="image2" accept="image/*" required/></td>
+   </tr>
+
+
+   <tr>
+	<td colspan="2">
+		<button class="btn btn-default" type="submit">제품 등록</button>
+	</td>
+   </tr>  
+</thead>
+      </table>
+      </div>
+</form>
+
+<script>
+	function onWriteSubmit()
+	{
+		if($("#creator_id").val().trim()=="")
+		{
+			var message="아이디를 입력해 주세요";
+			$("#sellerid").val("");
+			$("#sellerid").focus();
+			alert(message);
+			return false;
+		}
+	}
+</script>
+
+
+  </body>
+</html>

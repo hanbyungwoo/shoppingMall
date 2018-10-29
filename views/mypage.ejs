@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<%include ./1.ejs %>
+	    
+ <head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+
+<div class="container">
+  <table class="table table-hover">
+
+
+		<h1>Mypage</h1>
+		<div name="mypagecontext"
+    			style="	border: 1px;
+    						float:center;
+    						margin: 0px;"
+
+				<tr>
+					<td rowspan="2"><%=row.nickname%>님<br><a href="/mypage/withdraw">회원 탈퇴</a></td>
+					<td>적립금 : <%=row.point%></td>
+					<td>누적 구매 금액 : <%=row.purchaseprice%></td>
+				</tr>
+			<table>
+		</div>
+		<div name="mypagemenu"
+				style="	
+							float: center; 
+							margin: 20 px;">
+			<br>
+			<button type="button" class="btn btn-default" onclick="location.href='/mypage/modify'">회원정보 수정</button>
+		    <br>
+		    <br>
+			<button type="button" class="btn btn-default" onclick="location.href='/mypage/q_a'">내가 쓴 Q&A</button>
+		    <br>
+		    <br>
+			<button type="button" class="btn btn-default" onclick="location.href='/mypage/mypurchase'">구매내역 보기</button>
+			<br>
+		    <br>
+			<button type="button" class="btn btn-default" onclick="location.href='/mypage/mywishlist'">관심 상품 보기</button>
+			<br>
+		    <br>   
+		    <button type="button" class="btn btn-default" onclick="location.href='/mypage/cart'">장바구니 </button>
+			<br>
+    	</div>
+    	
+    	
+		
+		
+	</body>
+</html>

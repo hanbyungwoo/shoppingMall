@@ -1,0 +1,100 @@
+<%include ./header.ejs %>
+<br><br>
+<%include ./sidebar.ejs %>
+
+    <br>
+
+    <script>
+      function btnDelete() {
+        if(confirm("선택한 데이터를 삭제하시겠습니까?")) {
+          var j = document.list.check_del.length;
+          var t = document.list.elements.length;
+
+          if( t == 1) {
+            if(document.list.check_del.checked == true) {
+              k = document.list.check_del.value;
+              document.list.action = "/seller/product_review_delete";
+              document.submit();
+
+            } else {
+              alert("삭제할 데이터를 선택하십시오");
+            }
+          } else {
+            var k = new Array();
+            var m = 0;
+            for( var i=0; i<j; i++) {
+              if(document.list.check_del[i].checked == true) {
+                k[m] = document.list.check_del[i].value;
+                m = m+1;
+              }
+            }
+            if( k > "") {
+              document.list.action = "/seller/product_review_delete";
+              document.list.submit();
+            } else {
+              alert("삭제할 데이터를 선택하십시오");
+            }
+          }
+        }
+      }
+
+    </script>
+
+    <form name="list" method="post">
+
+
+    <h2 class="sub-header">리뷰 관리</h2>
+
+    <div class="margin-bottom" style="text-align:right">
+      
+      <input type="button" value="삭제" class="btn btn-danger" onclick=btnDelete();>
+    
+
+    &nbsp;
+  </div>
+
+  <br>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thread>
+          <tr>
+            <td></td>
+            <td>상품 번호</td>
+            <td>상품 이름</td>
+            <td>제조일자</td>
+            <td>제목</td>
+            <td>내용</td>
+            <td>평점</td>
+          </tr>
+        </thread>
+        <tbody>
+          <%
+            for(var i=0; i<rows.length; i++) {
+              var oneItem = rows[i];
+              
+            
+
+          %>
+          <tr data-toggle="modal" data-target="#updateStore" onclick="updateStoreModal("<%=oneItem.productnum%>)">
+            <input type="hidden" name="productnum" value="<%=oneItem.productnum%>">
+            <input type="hidden" name="purchasenum" value="<%=oneItem.purchasenum%>">
+            <td onclick="event.cancelBubble = true;">
+            <input type="checkbox" name="check_del" value="<%=oneItem.productnum%>"></td>
+            <td><%=oneItem.productnum%></td>
+            <td><%=oneItem.productname%></td>
+            
+            <td><%=oneItem.productdate%></td>
+            <td><%=oneItem.title%></td>
+            <td><%=oneItem.context%></td>
+            <td><%=oneItem.score%></td>
+          </tr>
+          <%
+            }
+          %>
+        </tbody>
+      </table>
+    </div>
+    </form>
+  </body>
+</html>

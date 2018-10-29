@@ -1,0 +1,50 @@
+  
+<meta charset="UTF-8">
+<title>Main page </title>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="script.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+<div>
+<div>
+<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
+       <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
+        <li><a href="/product/best9">Best9</a></li>
+        <li><a href="/product/product_list/top">Top</a></li>
+      <li><a href="/product/product_list/outer">Outer</a></li>
+      <li><a href="/product/product_list/pants">Pants</a></li>
+     <% if(user_id === undefined) { %>
+        <li><a href="/login">login</a></li>
+        <li><a href="/join">Join</a></li>
+      </td>
+      <% } else { %>
+        <li><a href="/login/logout">logout</a></li>
+      <% } %>
+      <li><a href="/Q&A">Q&A</a></li>
+      <li><a href="/mypage">Mypage</a></li>
+
+       <% if(department === undefined) { %>
+        <li><a href="/">아직 로그인 ㄴㄴ</a></li>      
+      <% } else if(department == "member") { %>
+        <li><a href="/"><%=user_id%>님 즐거운 쇼핑되세요</a></li>
+      <% } else if(department == "seller") { %>
+        <li><a href="/seller">판매자 페이지 가기</a></li>
+      <% } else { %>
+        <li><a href="/manager">관리자 페이지 가기</a></li>
+      <% } %>
+      
+      ㄴ
+      
+    </ul>
+</nav>
+</div>
+<br/>
+<div class="jumbotron" align="center"> <p>
+슈나이퍼 샵 </p></div>
+</div>

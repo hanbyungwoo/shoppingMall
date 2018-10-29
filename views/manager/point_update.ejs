@@ -1,0 +1,57 @@
+<%include ./header.ejs %>
+<br><br>
+<%include ./sidebar.ejs %>
+
+    <br>
+
+    <script>
+      function onWriteSubmit() {
+        
+        
+        $("#updateForm").submit();
+
+      }
+      
+    </script>
+
+    <form id="updateForm" name="updateForm" action="/manager/point_update" method="post" onsubmit="return onWriteSubmit()">
+    
+    <h2 class="sub-header">Point 수정</h2>
+
+
+	<br>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+
+      <input type="hidden" name="memberid" id="memberid" value="<%=row.memberid%>"/>
+      <tr>
+        <td>ID</td>
+        <td><%=row.memberid%></td>
+      </tr>
+
+      <tr>
+        <td>POINT</td>
+        <td><input type="text" name="point" id="point" value="<%=row.point%>" required/></td>
+      </tr>
+
+      <tr>
+        <td>구매가격</td>
+        <td><input type="text" name="purchaseprice" id="purchaseprice" value="<%=row.purchaseprice%>" required/></td>
+      </tr>
+
+      </table>
+    </div>
+    <br>
+    <div class="margin-bottom" style="text-align:center">
+
+      <button type="submit" class="btn btn-success">수정</button>
+
+      &nbsp;
+
+      <input type="button" value="취소" class="btn btn-danger" onClick="self.location='/manager/point';">
+     
+    </div>
+    </form>
+  </body>
+</html>

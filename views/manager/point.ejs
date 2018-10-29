@@ -1,0 +1,104 @@
+<%include ./header.ejs %>
+<br><br>
+<%include ./sidebar.ejs %>
+
+    <br>
+    <script>
+      function btnUpdate() {
+        if(confirm("선택한 데이터를 수정하시겠습니까?")) {
+          var j = document.list.check_update.length;
+          var t = document.list.elements.length;
+
+          if( t == 1) {
+            if(document.list.check_update.checked == true) {
+              k = document.list.check_update.value;
+              document.list.action = "/manager/point_update";
+              document.submit();
+
+            } else {
+              alert("변경할 데이터를 선택하십시오");
+            }
+          } else {
+            var k = new Array();
+            var m = 0;
+            for( var i=0; i<j; i++) {
+              if(document.list.check_update[i].checked == true) {
+                k[m] = document.list.check_update[i].value;
+                m = m+1;
+              }
+            }
+            if( m == 1) {
+              document.list.action = "/manager/point_update";
+              document.list.submit();
+            } else {
+              alert("변경할 데이터를 1개를 선택하십시오");
+            }
+          }
+        }
+      }
+    </script>
+
+
+    <form name="list" method="get">
+    <h2 class="sub-header">Point 관리</h2>
+    
+	<div>
+        총 <%=count%> 회원
+        <br>
+	</div>
+    <div class="margin-bottom" style="text-align:right">
+    
+    	<input type="button" value="수정" class="btn btn-success" onclick=btnUpdate();>
+    	
+
+
+    &nbsp;
+	</div>
+
+	<br>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thread>
+          <tr>
+            <td></td>
+            <td>ID</td>
+            <td>POINT</td>
+            <td>구매가격</td>
+          </tr>
+        </thread>
+        <tbody>
+          <%
+            for(var i=0; i<rows.length; i++) {
+              var oneItem = rows[i];
+            
+
+          %>
+          <tr data-toggle="modal" data-target="#updateStore" onclick="updateStoreModal("<%=oneItem.memberid%>)">
+            <input type="hidden" name="memberid" value="<%=oneItem.memberid%>">
+            <td onclick="event.cancelBubble = true;">
+            <input type="checkbox" name="check_update" value="<%=oneItem.memberid%>"></td>
+            <td><%=oneItem.memberid%></td>
+            <td><%=oneItem.point%></td>
+            <td><%=oneItem.purchaseprice%></td>
+          </tr>
+          <%
+            }
+          %>
+        </tbody>
+      </table>
+    </div>
+    </form>
+    <div align="center">
+		<br>
+		<font color="black">
+<%
+		for(var i = 0; i < count/20; i++){ 
+%>
+			<a href="/manager/point/<%=i+1%>"><%=i+1%>
+<%
+		}
+%>
+		</font>
+	<div/>
+  </body>
+</html>

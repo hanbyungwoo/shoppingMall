@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<%include ./1.ejs %>
+
+<head>
+ <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+
+	<h1><%= title %></h1>
+<form  action="/Q&A/q_acontent" method="post" onsubmit ="return onWriteSubmit()">
+
+		
+		<input type="hidden" name="contentnum" value="<%=row.contentnum%>"/>
+		<tr>
+		
+			<tr>
+			<td>패스워드</td>
+			<td><input type= "password" name="passwd" id= "passwd" required/></td>
+			</tr>
+
+			<tr>
+			<td colspan="2"><button class="btn btn-default" type="submit">확인 </button>
+			<td colspan="2"><a href="/Q&A" class="btn btn-default" >리스트로 돌아가기</a>
+			</td>
+			</tr>
+		
+				 </tbody>
+
+  </table>
+  	</div>
+				</form>
+
+
+
+
+<script> 
+function onWriteSubmit()
+{
+		if($("#passwd").val().trim()=="")
+		{
+			var message ="password를 입력해 주세요 ";
+			$("#passwd").val("");
+			$("#passwd").focus();
+			alert(message);
+			return false;
+		}
+	}
+</script>
+</body>
+</html>
+

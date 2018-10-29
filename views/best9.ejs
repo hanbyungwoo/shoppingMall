@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en">
+ <%include ./1.ejs %>
+<head>
+
+</style>
+
+<meta charset="UTF-8">
+<title>Main page </title>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="script.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+</head>
+
+
+<body>
+</div>
+<div>
+   <h2 style="margin-left: 325px">BEST 9</h2>
+   <br></br>
+<div align="center">
+   <table>
+<%
+      for(var i = 0; i < length/3; i++){
+%>
+         <tr>
+<%
+            for(var j = 0; j < 3; j++){
+               if(i*3+j >= length) break;
+%>
+               <td>
+            	  <font size=5>★<%=i*3+j+1%>위</font>
+            	  <br>
+                  <a href="/product/product_detail/<%=row[i*3+j].productnum%>">
+                  <img src="../../../images/<%=row[i*3+j].producttype%>/<%=row[i*3+j].image1%>" width=200>
+                  <br><font color="black" size=1> <%=row[i*3+j].productname%>
+                  <br>
+                  <br>소비자가 : <span style="text-decoration:line-through;"><%=row[i*3+j].price%>원</span>
+                  <br>판매가 : <%=row[i*3+j].price - row[i*3+j].sale%>원</font></a><br></br>
+               </td>
+<%
+            }
+%>
+         </tr>
+<%
+      }
+%>
+   </table>
+   <br>
+</div>
+
+  </body>
+</html>`

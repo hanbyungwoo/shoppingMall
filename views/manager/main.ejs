@@ -1,0 +1,152 @@
+<%include ./header.ejs %>
+<br><br>
+<%include ./sidebar.ejs %>
+
+    <br>
+
+
+    <script>
+    	function btnDelete() {
+    		if(confirm("선택한 데이터를 삭제하시겠습니까?")) {
+    			var j = document.list.check_del.length;
+    			var t = document.list.elements.length;
+
+    			if( t == 1) {
+    				if(document.list.check_del.checked == true) {
+    					k = document.list.check_del.value;
+    					document.list.action = "/manager/member_delete";
+    					document.submit();
+
+    				} else {
+    					alert("삭제할 데이터를 선택하십시오");
+    				}
+    			} else {
+    				var k = new Array();
+    				var m = 0;
+    				for( var i=0; i<j; i++) {
+    					if(document.list.check_del[i].checked == true) {
+    						k[m] = document.list.check_del[i].value;
+    						m = m+1;
+    					}
+    				}
+    				if( k > "") {
+    					document.list.action = "/manager/member_delete";
+    					document.list.submit();
+    				} else {
+    					alert("삭제할 데이터를 선택하십시오");
+    				}
+    			}
+    		}
+    	}
+
+        function btnUpdate() {
+        if(confirm("선택한 데이터를 수정하시겠습니까?")) {
+          var j = document.list.check_del.length;
+          var t = document.list.elements.length;
+
+          if( t == 1) {
+            if(document.list.check_del.checked == true) {
+              k = document.list.check_del.value;
+              document.list.action = "/manager/member_update";
+              document.list.method = "get";
+              document.submit();
+
+            } else {
+              alert("변경할 데이터를 선택하십시오");
+            }
+          } else {
+            var k = new Array();
+            var m = 0;
+            for( var i=0; i<j; i++) {
+              if(document.list.check_del[i].checked == true) {
+                k[m] = document.list.check_del[i].value;
+                m = m+1;
+              }
+            }
+            if( m == 1) {
+              document.list.action = "/manager/member_update";
+              document.list.method = "get";
+              document.list.submit();
+            } else {
+              alert("변경할 데이터를 1개를 선택하십시오");
+            }
+          }
+        }
+      }
+
+    </script>
+
+    <form name="list" method="post">
+    
+    <h2 class="sub-header">계정 관리</h2>
+
+	<div>
+        총 <%=count%> 회원
+        <br>
+	</div>
+    <div class="margin-bottom" style="text-align:right">
+    	<input type="button" value="추가" class="btn btn-success" onClick="self.location='/join';">
+
+        <input type="button" value="수정" class="btn btn-default" onclick=btnUpdate();>
+
+
+    	<input type="button" value="삭제" class="btn btn-danger" onclick=btnDelete();>
+
+    	&nbsp;
+
+	</div>
+
+	<br>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thread>
+          <tr>
+            <td></td>
+            <td>ID</td>
+            <td>Nickname</td>
+            <td width="350">주소</td>
+            <td width="150">핸드폰</td>
+            <td>TYPE</td>
+            <td>Email</td>
+          </tr>
+        </thread>
+        <tbody>
+          <%
+            for(var i=0; i<rows.length; i++) {
+              var oneItem = rows[i];
+            
+
+          %>
+          <tr data-toggle="modal" data-target="#updateStore" onclick="updateStoreModal("<%=oneItem.memberid%>)">
+            <input type="hidden" name="storeId" value="<%=oneItem.memberid%>">
+            <td onclick="event.cancelBubble = true;">
+            <input type="checkbox" name="check_del" value="<%=oneItem.memberid%>"></td>
+            <td><%=oneItem.memberid%></td>
+            <td><%=oneItem.nickname%></td>
+            <td width="350"><%=oneItem.address%></td>
+            <td width="150"><%=oneItem.phone%></td>
+            <td><%=oneItem.department%></td>
+            <td><%=oneItem.email%></td>
+          </tr>
+          <%
+            }
+          %>
+        </tbody>
+      </table>
+    </div>
+    </form>
+	<div align="center">
+		<br>
+		<font color="black">
+<%
+		for(var i = 0; i < count/20; i++){ 
+%>
+			<a href="/manager/main/<%=i+1%>"><%=i+1%>
+<%
+		}
+%>
+		</font>
+	<div/>
+  </body>
+</html>
